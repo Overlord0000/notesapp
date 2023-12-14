@@ -1,3 +1,5 @@
+// DatabaseHelper.java
+
 package com.example.notesapp;
 
 import android.content.ContentValues;
@@ -5,7 +7,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -92,5 +96,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return notes;
+    }
+
+    public Note getNoteById(long noteId) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {
+                COLUMN_ID,
+                COLUMN_TITLE,
+                COLUMN_DESCRIPTION,
+                COLUMN_TIMESTAMP
+        };
+
+        // Query to get a single note by its ID
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                projection,
+                COLUMN_ID + " = ?",
+                new String[]{String.valueOf(noteId)},
+                null,
+                null,
+                null
+        );
+
+        Note note = null;
+
+        if (cursor.moveToFirst()) {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
+            String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+            String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIMESTAMP));
+
+            note = new Note(id, title, description, timestamp);
+        }
+
+        cursor.close();
+        db.close();
+
+        return note;
     }
 }

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:layout_marginBottom="10dp"
+    android:id="@+id/item"
     android:background="@drawable/rounded_corner"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -30,6 +31,6 @@
         android:textSize="12dp"
         android:gravity="end"
         android:textColor="#858484"
-        tools:text="Jan 21 2020 "/>
+        tools:text="Dec 10 2023 "/>
 
 </RelativeLayout>

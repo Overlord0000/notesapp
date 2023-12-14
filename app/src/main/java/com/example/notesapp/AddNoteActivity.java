@@ -31,25 +31,22 @@ public class AddNoteActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSaveButtonClick(view);
-                onSaveClick(view);
+                String title = titleInput.getText().toString().trim();
+                String description = descriptionInput.getText().toString().trim();
+
+                if (!title.isEmpty() && !description.isEmpty()) {
+                    saveNoteToDatabase(title, description);
+                    onSaveClick(view);
+                    finish();
+                } else {
+                    Toast.makeText(AddNoteActivity.this, "Please fill both title and description", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
     }
 
-    public void onSaveButtonClick(View view) {
-        String title = titleInput.getText().toString().trim();
-        String description = descriptionInput.getText().toString().trim();
-
-        if (!title.isEmpty() && !description.isEmpty()) {
-            saveNoteToDatabase(title, description);
-
-            finish();
-        } else {
-            Toast.makeText(this, "Please enter both title and description", Toast.LENGTH_SHORT).show();
-        }
-    }
     public void onSaveClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

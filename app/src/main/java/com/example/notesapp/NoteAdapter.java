@@ -1,12 +1,13 @@
-package com.example.notesapp;
+package com.example.notesapp;// NoteAdapter.java
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 
 import java.util.ArrayList;
 
@@ -36,6 +37,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public int getItemCount() {
         return notes.size();
+    }
+
+    public Note getItem(int position) {
+        return notes.get(position);
     }
 
     static class NoteViewHolder extends RecyclerView.ViewHolder {
