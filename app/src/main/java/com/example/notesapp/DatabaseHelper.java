@@ -135,4 +135,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return note;
     }
+    public void deleteNoteById(long noteId) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(noteId)});
+        db.close();
+    }
+
 }

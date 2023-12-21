@@ -20,9 +20,9 @@ public class Note {
     private String timestamp;
 
     // Constructors
-    public Note() {
+   public Note() {
         // Default constructor required for SQLite
-    }
+   }
 
     public Note(long id, String title, String description, String timestamp) {
         this.id = id;
@@ -56,7 +56,7 @@ public class Note {
         this.description = description;
     }
 
-    public String getTimestamp() {
+   public String getTimestamp() {
         return timestamp;
     }
 
@@ -79,7 +79,7 @@ public class Note {
     // Add SQLite annotations
     // These annotations are used by the SQLiteOpenHelper to create and update the database
     public static final String SQL_CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + " (" +
+          "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_TITLE + " TEXT," +
                     COLUMN_DESCRIPTION + " TEXT," +
@@ -88,5 +88,4 @@ public class Note {
     public static final String SQL_DROP_TABLE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    // ... (Other methods as needed)
 }

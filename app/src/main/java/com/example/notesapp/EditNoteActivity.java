@@ -1,7 +1,8 @@
+// EditNoteActivity.java
+
 package com.example.notesapp;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -37,11 +38,11 @@ public class EditNoteActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         // Retrieve note id from intent
-        noteId = getIntent().getLongExtra("NOTE_ID", -1);
+        noteId = getIntent().getLongExtra(EXTRA_NOTE_ID, -1);
 
         if (noteId != -1) {
             // Load existing note data
-            loadNoteData();
+            loadNoteData(noteId);
         }
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +53,10 @@ public class EditNoteActivity extends AppCompatActivity {
         });
     }
 
-    private void loadNoteData() {
+    private void loadNoteData(long noteId) {
         Note note = dbHelper.getNoteById(noteId);
+
+        // Check if the note is not null before updating the UI
         if (note != null) {
             titleInput.setText(note.getTitle());
             descriptionInput.setText(note.getDescription());
@@ -64,6 +67,7 @@ public class EditNoteActivity extends AppCompatActivity {
         String title = titleInput.getText().toString().trim();
         String description = descriptionInput.getText().toString().trim();
 
+        // Check if both title and description are not empty
         if (!title.isEmpty() && !description.isEmpty()) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -71,6 +75,7 @@ public class EditNoteActivity extends AppCompatActivity {
             values.put(DatabaseHelper.COLUMN_DESCRIPTION, description);
             values.put(DatabaseHelper.COLUMN_TIMESTAMP, getFormattedCurrentTimestamp());
 
+            // Update the note in the database
             int numRowsAffected = db.update(
                     DatabaseHelper.TABLE_NAME,
                     values,
@@ -95,5 +100,4 @@ public class EditNoteActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy HH:mm", Locale.getDefault());
         return sdf.format(new Date());
     }
-
 }

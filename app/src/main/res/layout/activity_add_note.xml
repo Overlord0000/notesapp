@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/titleinput"
             android:hint="Title"
+            android:inputType="text"
             android:background="#3000B0FF"
             android:padding="10dp"
             android:layout_margin="10dp"/>
