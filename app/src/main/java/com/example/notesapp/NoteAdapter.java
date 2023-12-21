@@ -40,6 +40,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         holder.timeTextView.setText(note.getFormattedTimestamp());
 
         // Set long click listener for item
+        //skip multi select
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

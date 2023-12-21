@@ -76,6 +76,10 @@ public class Note {
         }
     }
 
+    //limit description length
+
+    //set Title to be highlighted
+
     // Add SQLite annotations
     // These annotations are used by the SQLiteOpenHelper to create and update the database
     public static final String SQL_CREATE_TABLE =
